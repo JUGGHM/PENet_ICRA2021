@@ -9,11 +9,12 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 + Both ENet and PENet can be trained thoroughly on 2x11G GPU.
 + Our network is trained with the KITTI dataset alone, pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
 
-## A Strong Two-branch Backbone
+## Method
+### A Strong Two-branch Backbone
 + Two branch
 + Geometric encoding
 
-## Dilated and Accelerated CSPN++
+### Dilated and Accelerated CSPN++
 + Dilated CSPN++
 + Accelerated CSPN++
 
@@ -82,6 +83,10 @@ python main.py --resume [checkpoint-path]
 # test the trained model on the val_selection_cropped data
 python main.py --evaluate [checkpoint-path] --val select
 ```
+
+## training
+![](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Training.png)
+
 
 ## Citation
 If you use our code or method in your work, please cite the following:
