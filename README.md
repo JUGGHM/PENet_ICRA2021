@@ -1,11 +1,16 @@
 # PENet
-# self-supervised-depth-completion
+"Towards Precise and Efficient Image Guided Depth Completion"(https://arxiv.org/pdf/.pdf)
+Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and Xiaojin Gong(https://person.zju.edu.cn/en/gongxj).
 
-This repo is the PyTorch implementation of our ICRA'21 paper on ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://arxiv.org/pdf/1807.00275.pdf), developed by []
+Our network is trained with the KITTI dataset alone, without pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
 
-Our network is trained with the KITTI dataset alone, without pretraining on Cityscapes or other similar driving dataset (either synthetic or real). The use of additional data is likely to further improve the accuracy.
+## A Strong Two-branch Backbone
 
-Please create a new issue for code-related questions.
+## Dilated CSPN++
+
+## Accelerated CSPN++
+
+
 
 ## Contents
 1. [Dependency](#dependency)
@@ -80,17 +85,10 @@ python main.py --evaluate [checkpoint-path] --val select
 ## Citation
 If you use our code or method in your work, please cite the following:
 
-	@article{ma2018self,
-		title={Self-supervised Sparse-to-Dense: Self-supervised Depth Completion from LiDAR and Monocular Camera},
-		author={Ma, Fangchang and Cavalheiro, Guilherme Venturelli and Karaman, Sertac},
-		booktitle={ICRA},
-		year={2019}
-	}
-	@article{Ma2017SparseToDense,
-		title={Sparse-to-Dense: Depth Prediction from Sparse Depth Samples and a Single Image},
-		author={Ma, Fangchang and Karaman, Sertac},
-		booktitle={ICRA},
-		year={2018}
-	}
+@article{hu2020PENet,
+  title={Towards Precise and Efficient Image Guided Depth Completion},
+  author={Hu, Mu and Wang, Shuling and Li, Bin and Ning, Shiyu and Fan, Li and Gong, Xiaojin}
+  year={2021}
+}
 
-  The original framework is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT. 
+  The original framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
