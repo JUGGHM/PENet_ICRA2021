@@ -1,6 +1,6 @@
 # PENet
-"Towards Precise and Efficient Image Guided Depth Completion"(https://arxiv.org/pdf/.pdf)
-Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and Xiaojin Gong(https://person.zju.edu.cn/en/gongxj).
+This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["Towards Precise and Efficient Image Guided Depth Completion"](https://arxiv.org/pdf/.pdf), developed by
+Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
 
 Our network is trained with the KITTI dataset alone, without pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
 
@@ -85,10 +85,10 @@ python main.py --evaluate [checkpoint-path] --val select
 ## Citation
 If you use our code or method in your work, please cite the following:
 
-@article{hu2020PENet,
-  title={Towards Precise and Efficient Image Guided Depth Completion},
-  author={Hu, Mu and Wang, Shuling and Li, Bin and Ning, Shiyu and Fan, Li and Gong, Xiaojin}
-  year={2021}
-}
+  @article{hu2020PENet,
+    title={Towards Precise and Efficient Image Guided Depth Completion},
+    author={Hu, Mu and Wang, Shuling and Li, Bin and Ning, Shiyu and Fan, Li and Gong, Xiaojin}
+    year={2021}
+  }
 
-  The original framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
+The original framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
