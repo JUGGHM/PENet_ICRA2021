@@ -7,10 +7,6 @@ submission. It also infers much faster than most of the top ranked methods.
 
 Our network is trained with the KITTI dataset alone, without pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
 
-The original code framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
-
-The part of CoordConv is rendered from ["An intriguing failing of convolutional neural networks and the CoordConv"](https://github.com/mkocabas/CoordConv-pytorch).
-
 ## A Strong Two-branch Backbone
 
 ## Dilated CSPN++
@@ -64,8 +60,8 @@ The overall data directory is structured as follows
 
 ## Trained Models
 Download our pre-trained models:
-- PENet (i.e., the proposed full model with dilation_rate=2): https://drive.google.com/file/d/1TRVmduAnrqDagEGKqbpYcKCT307HVQp1/view?usp=sharing
-- ENet (i.e., the backbone): https://drive.google.com/file/d/1RDdKlKJcas-G5OA49x8OoqcUDiYYZgeM/view?usp=sharing
+- PENet (i.e., the proposed full model with dilation_rate=2): [Download](https://drive.google.com/file/d/1TRVmduAnrqDagEGKqbpYcKCT307HVQp1/view?usp=sharing)
+- ENet (i.e., the backbone): [Download](https://drive.google.com/file/d/1RDdKlKJcas-G5OA49x8OoqcUDiYYZgeM/view?usp=sharing)
 
 ## Commands
 A complete list of training options is available with
@@ -96,3 +92,8 @@ If you use our code or method in your work, please cite the following:
 		booktitle={ICRA},
 		year={2021}
 	}
+
+## Related Repositories
+The original code framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
+
+The part of CoordConv is rendered from ["An intriguing failing of convolutional neural networks and the CoordConv"](https://github.com/mkocabas/CoordConv-pytorch).
