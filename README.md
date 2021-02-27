@@ -2,7 +2,14 @@
 This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["Towards Precise and Efficient Image Guided Depth Completion"](https://arxiv.org/pdf/.pdf), developed by
 Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
 
+The proposed full model ranks 1st in the KITTI depth completion online leaderboard at the time of
+submission. It also infers much faster than most of the top ranked methods.
+
 Our network is trained with the KITTI dataset alone, without pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
+
+The original code framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
+
+The part of CoordConv is rendered from ["An intriguing failing of convolutional neural networks and the CoordConv"](https://github.com/mkocabas/CoordConv-pytorch).
 
 ## A Strong Two-branch Backbone
 
@@ -31,36 +38,34 @@ pip install opencv-contrib-python==3.4.2.16
 ```
 
 ## Data
-- Download the [KITTI Depth](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) Dataset from their website. Use the following scripts to extract corresponding RGB images from the raw dataset.
-```bash
-./download/rgb_train_downloader.sh
-./download/rgb_val_downloader.sh
+- Download the [KITTI Depth](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) Dataset from their website.
+The overall data directory is structured as follows
 ```
-The downloaded rgb files will be stored in the `../data/data_rgb` folder. The overall code, data, and results directory is structured as follows (updated on Oct 1, 2019)
-```
-.
-├── self-supervised-depth-completion
-├── data
-|   ├── data_depth_annotated
-|   |   ├── train
-|   |   ├── val
-|   ├── data_depth_velodyne
-|   |   ├── train
-|   |   ├── val
-|   ├── depth_selection
-|   |   ├── test_depth_completion_anonymous
-|   |   ├── test_depth_prediction_anonymous
-|   |   ├── val_selection_cropped
-|   └── data_rgb
-|   |   ├── train
-|   |   ├── val
-├── results
+|
+├── kitti_depth
+|   ├── depth
+|   |   ├──data_depth_annotated
+|   |   |  ├── train
+|   |   |  ├── val
+|   |   ├── data_depth_velodyne
+|   |   |  ├── train
+|   |   |  ├── val
+|   |   ├── data_depth_selection
+|   |   |  ├── test_depth_completion_anonymous
+|   |   |  |── test_depth_prediction_anonymous
+|   |   |  ├── val_selection_cropped
+├── kitti_raw
+|   ├── 2011_09_26
+|   ├── 2011_09_28
+|   ├── 2011_09_29
+|   ├── 2011_09_30
+|   ├── 2011_10_03
 ```
 
 ## Trained Models
-Download our trained models at http://datasets.lids.mit.edu/self-supervised-depth-completion to a folder of your choice.
-- supervised training (i.e., models trained with semi-dense lidar ground truth): http://datasets.lids.mit.edu/self-supervised-depth-completion/supervised/
-- self-supervised (i.e., photometric loss + sparse depth loss + smoothness loss): http://datasets.lids.mit.edu/self-supervised-depth-completion/self-supervised/
+Download our pre-trained models:
+- PENet (i.e., the proposed full model with dilation_rate=2): https://drive.google.com/file/d/1TRVmduAnrqDagEGKqbpYcKCT307HVQp1/view?usp=sharing
+- ENet (i.e., the backbone): https://drive.google.com/file/d/1RDdKlKJcas-G5OA49x8OoqcUDiYYZgeM/view?usp=sharing
 
 ## Commands
 A complete list of training options is available with
@@ -81,8 +86,6 @@ python main.py --resume [checkpoint-path]
 # test the trained model on the val_selection_cropped data
 python main.py --evaluate [checkpoint-path] --val select
 ```
-
-  The original framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
 
 ## Citation
 If you use our code or method in your work, please cite the following:
