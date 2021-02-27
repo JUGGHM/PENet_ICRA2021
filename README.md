@@ -38,10 +38,9 @@ pip install opencv-contrib-python==3.4.2.16
 ```
 
 ## Data
-- Download the [KITTI Depth](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) and [KITTI Raw](http://www.cvlibs.net/datasets/kitti/raw_data.php) Dataset from their website. 
+- Download the [KITTI Depth](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) and [KITTI Raw](http://www.cvlibs.net/datasets/kitti/raw_data.php) Dataset from their website.
 The overall data directory is structured as follows
 ```
-|
 ├── kitti_depth
 |   ├── depth
 |   |   ├──data_depth_annotated
@@ -54,6 +53,9 @@ The overall data directory is structured as follows
 |   |   |  ├── test_depth_completion_anonymous
 |   |   |  |── test_depth_prediction_anonymous
 |   |   |  ├── val_selection_cropped
+```
+
+```
 ├── kitti_raw
 |   ├── 2011_09_26
 |   ├── 2011_09_28
