@@ -5,7 +5,7 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 ## Results
 + The proposed full model ranks 1st in the [KITTI depth completion](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) online leaderboard at the time of submission.
 + It infers much faster than most of the top ranked methods.
-
+![Comparison with SoTA](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Comparison.png "Comparison")
 + Both ENet and PENet can be trained thoroughly on 2x11G GPU.
 + Our network is trained with the KITTI dataset alone, pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
 
@@ -72,20 +72,29 @@ A complete list of training options is available with
 ```bash
 python main.py -h
 ```
-For instance,
+### Training
+![Training Pipeline](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Training.png "Training")
 ```bash
 # train with the KITTI semi-dense annotations, rgbd input, and batch size 1
 python main.py --train-mode dense -b 1 --input rgbd
-
+```
+```bash
 # resume previous training
 python main.py --resume [checkpoint-path]
+```
 
+### Evalution
+```bash
 # test the trained model on the val_selection_cropped data
 python main.py --evaluate [checkpoint-path] --val select
 ```
 
-## training
-![Training Pipeline](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Training.png "Training")
+### Test
+```bash
+# test the trained model on the val_selection_cropped data
+python main.py --evaluate [checkpoint-path] --val select
+```
+
 
 
 ## Citation
