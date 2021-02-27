@@ -1,4 +1,4 @@
-# PENet
+# PEDC: **P**recise and **E**fficient **D**epth **C**ompletion
 This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["Towards Precise and Efficient Image Guided Depth Completion"](https://arxiv.org/pdf/.pdf), developed by
 Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
 
