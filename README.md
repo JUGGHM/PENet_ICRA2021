@@ -85,7 +85,7 @@ python main.py --evaluate [checkpoint-path] --val select
 ```
 
 ## training
-![](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Training.png)
+![Training Pipeline](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Training.png "Training")
 
 
 ## Citation
