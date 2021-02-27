@@ -87,8 +87,9 @@ The original framework is rendered from ["Self-supervised Sparse-to-Dense:  Self
 ## Citation
 If you use our code or method in your work, please cite the following:
 
-  @article{hu2020PENet,
-    title={Towards Precise and Efficient Image Guided Depth Completion},
-    author={Hu, Mu and Wang, Shuling and Li, Bin and Ning, Shiyu and Fan, Li and Gong, Xiaojin}
-    year={2021}
-  }
+	@article{ma2018self,
+		title={Self-supervised Sparse-to-Dense: Self-supervised Depth Completion from LiDAR and Monocular Camera},
+		author={Ma, Fangchang and Cavalheiro, Guilherme Venturelli and Karaman, Sertac},
+		booktitle={ICRA},
+		year={2019}
+	}
