@@ -28,18 +28,22 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 
 
 ## Dependency
-This code was tested with Python 3 and PyTorch 1.0 on Ubuntu 16.04.
+Our released implementation tested on.
++ Ubuntu 16.04
++ Python 3.7.4 (Anaconda 2019.10)
++ PyTorch 1.3.1 / torchvision 0.4.2
++ NVIDIA CUDA 10.0.130
++ 4x NVIDIA GTX 2080 Ti GPUs
+
 ```bash
 pip install numpy matplotlib Pillow
-pip install torch torchvision # pytorch
-
-# for self-supervised training requires opencv, along with the contrib modules
-pip install opencv-contrib-python==3.4.2.16
+pip install scikit-image
+pip install opencv-contrib-python==3.4.2.17
 ```
 
 ## Data
-- Download the [KITTI Depth](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) and [KITTI Raw](http://www.cvlibs.net/datasets/kitti/raw_data.php) Dataset from their website.
-The overall data directory is structured as follows
+- Download the [KITTI Depth](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) Dataset and [KITTI Raw](http://www.cvlibs.net/datasets/kitti/raw_data.php) Dataset from their websites.
+The overall data directory is structured as follows:
 ```
 ├── kitti_depth
 |   ├── depth
@@ -96,8 +100,6 @@ python main.py --evaluate [checkpoint-path] --val select
 # test the trained model on the val_selection_cropped data
 python main.py --evaluate [checkpoint-path] --val select
 ```
-
-
 
 ## Citation
 If you use our code or method in your work, please cite the following:
