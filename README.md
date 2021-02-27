@@ -3,21 +3,19 @@ This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["
 Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
 
 ## Results
-### Precision
-The proposed full model ranks 1st in the [KITTI depth completion](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) online leaderboard at the time of submission.
-### Inference Efficiency: Fast
-It infers much faster than most of the top ranked methods.
-### Training Efficiency: Small GPU Consuming and No Additional Dataset Required
-Both ENet and PENet can be trained thoroughly on 2x11G GPUs.
++ The proposed full model ranks 1st in the [KITTI depth completion](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) online leaderboard at the time of submission.
++ It infers much faster than most of the top ranked methods.
 
-Our network is trained with the KITTI dataset alone,  pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
++ Both ENet and PENet can be trained thoroughly on 2x11G GPU.
++ Our network is trained with the KITTI dataset alone, pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
 
 ## A Strong Two-branch Backbone
++ Two branch
++ Geometric encoding
 
-## Dilated CSPN++
-
-## Accelerated CSPN++
-
+## Dilated and Accelerated CSPN++
++ Dilated CSPN++
++ Accelerated CSPN++
 
 
 ## Contents
@@ -77,9 +75,6 @@ For instance,
 ```bash
 # train with the KITTI semi-dense annotations, rgbd input, and batch size 1
 python main.py --train-mode dense -b 1 --input rgbd
-
-# train with the self-supervised framework, not using ground truth
-python main.py --train-mode sparse+photo
 
 # resume previous training
 python main.py --resume [checkpoint-path]
