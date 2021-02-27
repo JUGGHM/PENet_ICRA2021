@@ -82,14 +82,13 @@ python main.py --resume [checkpoint-path]
 python main.py --evaluate [checkpoint-path] --val select
 ```
 
-The original framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
-
 ## Citation
 If you use our code or method in your work, please cite the following:
 
-	@article{ma2018self,
-		title={Self-supervised Sparse-to-Dense: Self-supervised Depth Completion from LiDAR and Monocular Camera},
-		author={Ma, Fangchang and Cavalheiro, Guilherme Venturelli and Karaman, Sertac},
-		booktitle={ICRA},
-		year={2019}
-	}
+  @article{hu2020PENet,
+    title={Towards Precise and Efficient Image Guided Depth Completion},
+    author={Hu, Mu and Wang, Shuling and Li, Bin and Ning, Shiyu and Fan, Li and Gong, Xiaojin},
+    year={2021}
+  }
+
+The original framework is rendered from ["Self-supervised Sparse-to-Dense:  Self-supervised Depth Completion from LiDAR and Monocular Camera"](https://github.com/fangchangma/self-supervised-depth-completion). It is developed by [Fangchang Ma](http://www.mit.edu/~fcma/), Guilherme Venturelli Cavalheiro, and [Sertac Karaman](http://karaman.mit.edu/) at MIT.
