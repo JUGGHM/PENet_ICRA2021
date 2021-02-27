@@ -2,9 +2,16 @@
 This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["Towards Precise and Efficient Image Guided Depth Completion"](https://arxiv.org/pdf/.pdf), developed by
 Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
 
-The proposed full model ranks 1st in the KITTI depth completion online leaderboard at the time of
-submission. It also infers much faster than most of the top ranked methods.
+## Precision
+The proposed full model ranks 1st in the KITTI depth completion online leaderboard at the time of submission.
 
+## Efficiency: Fast Inference
+It infers much faster than most of the top ranked methods.
+
+## Efficiency: Small GPU Consuming for Training
+Both ENet and PENet can be trained thouroughly on 2x11G GPUs.
+
+## Need No Additional Dataset
 Our network is trained with the KITTI dataset alone, without pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
 
 ## A Strong Two-branch Backbone
