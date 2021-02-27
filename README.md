@@ -4,7 +4,7 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 
 ## Precision and Efficiency
 ### Precision
-The proposed full model ranks 1st in the KITTI depth completion online leaderboard at the time of submission.
+The proposed full model ranks 1st in the [KITTI depth completion](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) online leaderboard at the time of submission.
 ### Inference Efficiency: Fast
 It infers much faster than most of the top ranked methods.
 ### Training Efficiency: Small GPU Consuming and No Additional Dataset Required
@@ -65,8 +65,8 @@ The overall data directory is structured as follows
 
 ## Trained Models
 Download our pre-trained models:
-- PENet (i.e., the proposed full model with dilation_rate=2): [Download](https://drive.google.com/file/d/1TRVmduAnrqDagEGKqbpYcKCT307HVQp1/view?usp=sharing)
-- ENet (i.e., the backbone): [Download](https://drive.google.com/file/d/1RDdKlKJcas-G5OA49x8OoqcUDiYYZgeM/view?usp=sharing)
+- PENet (*i.e.*, the proposed full model with dilation_rate=2): [Download Here](https://drive.google.com/file/d/1TRVmduAnrqDagEGKqbpYcKCT307HVQp1/view?usp=sharing)
+- ENet (*i.e.*, the backbone): [Download Here](https://drive.google.com/file/d/1RDdKlKJcas-G5OA49x8OoqcUDiYYZgeM/view?usp=sharing)
 
 ## Commands
 A complete list of training options is available with
