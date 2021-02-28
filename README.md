@@ -14,7 +14,7 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 ### A Strong Two-branch Backbone
 #### Revisiting the popular two-branch architecture
 ![Backbone](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Backbone.png "Backbone")
-<img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Backbone.png width = "100%" height = "100%" align=center />
+<img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Backbone.png" width = "100%" height = "100%" align=center />
 The two-branch backbone is designed to thoroughly exploit color-dominant and depth-dominant information from
 their respective branches and make the fusion of two modalities effective. Note that it is the depth prediction result
 obtained from the color-dominant branch is input to the depth-dominant branch, not a guidance map like that in [DeepLiDAR](https://github.com/JiaxiongQ/DeepLiDAR) and [FusionNet](https://github.com/wvangansbeke/Sparse-Depth-Completion).
