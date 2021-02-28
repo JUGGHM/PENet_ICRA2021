@@ -16,15 +16,15 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 <div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Backbone.png" width = "100%" height = "100%" /></div>
 The two-branch backbone is designed to thoroughly exploit color-dominant and depth-dominant information from
 their respective branches and make the fusion of two modalities effective. Note that it is the depth prediction result
-obtained from the color-dominant branch is input to the depth-dominant branch, not a guidance map like that in [DeepLiDAR](https://github.com/JiaxiongQ/DeepLiDAR) and [FusionNet](https://github.com/wvangansbeke/Sparse-Depth-Completion).
+obtained from the color-dominant branch that is input to the depth-dominant branch, not a guidance map like those in [KITTI depth completion](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion)  [DeepLiDAR](https://github.com/JiaxiongQ/DeepLiDAR) and [FusionNet](https://github.com/wvangansbeke/Sparse-Depth-Completion).
 
 #### Geometric convolutional Layer
-<div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Geometric_Encoding.png" width = "50%" height = "50%" /></div>
+<div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Geometric_Encoding.png" width = "60%" height = "60%" /></div>
 To encode 3D geometric information, it simply augments a conventional convolutional layer via concatenating a 3D position map to the layer’s input.
 
 ### Dilated and Accelerated CSPN++
 #### Dilated CSPN
-<div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Dilated_CSPN.png" width = "50%" height = "50%" /></div>
+<div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Dilated_CSPN.png" width = "60%" height = "60%" /></div>
 we introduce a dilation strategy similar to the well known dilated convolutions to enlarge the propagation neighborhoods.
 
 #### Accelerated CSPN
