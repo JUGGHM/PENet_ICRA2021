@@ -28,7 +28,7 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 
 
 ## Dependency
-Our released implementation tested on.
+Our released implementation is tested on.
 + Ubuntu 16.04
 + Python 3.7.4 (Anaconda 2019.10)
 + PyTorch 1.3.1 / torchvision 0.4.2
@@ -80,25 +80,40 @@ python main.py -h
 ```
 ### Training
 ![Training Pipeline](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Training.png "Training")
+
+1. Train ENet(Part Ⅰ)
 ```bash
 # train with the KITTI semi-dense annotations, rgbd input, and batch size 1
-python main.py --train-mode dense -b 1 --input rgbd
+CUDA_VISIBLE_DEVICES="0,1" python main.py -b 6 -n e
+# -b for batch size
+# -n for network model
 ```
+
+2. Train DA-CSPN++(Part Ⅱ)
+```bash
+
+CUDA_VISIBLE_DEVICES="0,1" python main.py -b 6 -f -n pe --resume [enet-checkpoint-path]
+# -f for freezing the parameters in the backbone
+# --resume for initializing the parameters from the checkpoint
+```
+
+3. Train PENet(Part Ⅲ)
 ```bash
 # resume previous training
-python main.py --resume [checkpoint-path]
+CUDA_VISIBLE_DEVICES="0,1" python main.py -b 10 -n pe -he 160 -w 576 --resume [penet-checkpoint-path]
+# -he, -w for the image size after random cropping
 ```
 
 ### Evalution
 ```bash
 # test the trained model on the val_selection_cropped data
-python main.py --evaluate [checkpoint-path] --val select
+CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [checkpoint-path]
 ```
 
 ### Test
 ```bash
 # test the trained model on the val_selection_cropped data
-python main.py --evaluate [checkpoint-path] --val select
+CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [checkpoint-path] --test
 ```
 
 ## Citation
