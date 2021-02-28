@@ -12,17 +12,20 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 
 ## Method
 ### A Strong Two-branch Backbone
-+ Revisiting the popular two-branch architecture
++ **Revisiting the popular two-branch architecture**
 ![Backbone](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Backbone.png "Backbone")
-We found that  
-+ Geometric encoding
+The two-branch backbone is designed to thoroughly exploit color-dominant and depth-dominant information from
+their respective branches and make the fusion of two modalities effective. Note that it is the depth prediction result
+obtained from the CD branch is input to DD branch, not a guidance map like that in [DeepLiDAR](https://github.com/JiaxiongQ/DeepLiDAR) and [FusionNet](https://github.com/wvangansbeke/Sparse-Depth-Completion).
++ **Geometric convolutional Layer**
 ![Geometric Encoding](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Geometric_Encoding.png "Geometric Encoding")
+To encode 3D geometric information, it simply augments a conventional convolutional layer via concatenating a 3D position map to the layer’s input.
 
 ### Dilated and Accelerated CSPN++
-+ Dilated CSPN
++ **Dilated CSPN**
 ![Dilated CSPN](https://github.com/JUGGHM/PEDC_ICRA2021/blob/main/images/Dilated_CSPN.png "Dilated CSPN")
 we introduce a dilation strategy similar to the well known dilated convolutions to enlarge the propagation neighborhoods.
-+ Accelerated CSPN
++ **Accelerated CSPN**
 ![Accelerated CSPN](https://github.com/JUGGHM/PEDC_ICRA2021/blob/main/images/Accelerated_CSPN.png "Accelerated CSPN")
 we design an implementation that makes the propagation from each neighbor truly parallel, which greatly accelerates the propagation procedure.
 
