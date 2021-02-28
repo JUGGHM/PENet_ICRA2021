@@ -6,7 +6,6 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 + The proposed full model ranks 1st in the [KITTI depth completion](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) online leaderboard at the time of submission.
 + It infers much faster than most of the top ranked methods.
 ![Comparison with SoTA](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Comparison.png "Comparison")
- <img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Comparison.png" width = "300" height = "200" alt="图片名称" align=center />
 
 + Both ENet and PENet can be trained thoroughly on 2x11G GPU.
 + Our network is trained with the KITTI dataset alone, pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
@@ -14,13 +13,16 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 ## Method
 ### A Strong Two-branch Backbone
 + Revisiting the popular two-branch architecture
+We found that
+![Backbone](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Backbone.png "Backbone")
 + Geometric encoding
-
-
+![Geometric Encoding](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Geometric_Encoding.png "Geometric Encoding")
 
 ### Dilated and Accelerated CSPN++
-+ Dilated CSPN++
-+ Accelerated CSPN++
++ Dilated CSPN
+![Dilated CSPN](https://github.com/JUGGHM/PEDC_ICRA2021/blob/main/images/Dilated_CSPN.png "Dilated CSPN")
++ Accelerated CSPN
+![Accelerated CSPN](https://github.com/JUGGHM/PEDC_ICRA2021/blob/main/images/Accelerated_CSPN.png "Accelerated CSPN")
 
 
 ## Contents
