@@ -17,6 +17,7 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 The two-branch backbone is designed to thoroughly exploit color-dominant and depth-dominant information from
 their respective branches and make the fusion of two modalities effective. Note that it is the depth prediction result
 obtained from the color-dominant branch is input to the depth-dominant branch, not a guidance map like that in [DeepLiDAR](https://github.com/JiaxiongQ/DeepLiDAR) and [FusionNet](https://github.com/wvangansbeke/Sparse-Depth-Completion).
+
 #### Geometric convolutional Layer
 <img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Geometric_Encoding.png" width = "50%" height = "50%" align=center />
 To encode 3D geometric information, it simply augments a conventional convolutional layer via concatenating a 3D position map to the layer’s input.
