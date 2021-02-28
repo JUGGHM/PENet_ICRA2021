@@ -10,7 +10,7 @@ Create a new issue for any code-related questions. Feel free to direct me as wel
 <div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Comparison.png" width = "100%" height = "100%" /></div>
 
 + Both ENet and PENet can be trained thoroughly on 2x11G GPU.
-+ Our network is trained with the KITTI dataset alone, pretraining on Cityscapes or other similar driving dataset (either synthetic or real).
++ Our network is trained with the KITTI dataset alone, not pretrained on Cityscapes or other similar driving dataset (either synthetic or real).
 
 ## Method
 ### A Strong Two-branch Backbone
@@ -99,14 +99,16 @@ python main.py -h
 ### Training
 ![Training Pipeline](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Training.png "Training")
 
-1. Train ENet(Part Ⅰ)
+Here we adopt a multi-stage training strategy to train the backbone, DA-CSPN++, and the full model progressively. However, end-to-end training is feasible as well.
+
+1. Train ENet (Part Ⅰ)
 ```bash
 CUDA_VISIBLE_DEVICES="0,1" python main.py -b 6 -n e
 # -b for batch size
 # -n for network model
 ```
 
-2. Train DA-CSPN++(Part Ⅱ)
+2. Train DA-CSPN++ (Part Ⅱ)
 ```bash
 
 CUDA_VISIBLE_DEVICES="0,1" python main.py -b 6 -f -n pe --resume [enet-checkpoint-path]
@@ -114,7 +116,7 @@ CUDA_VISIBLE_DEVICES="0,1" python main.py -b 6 -f -n pe --resume [enet-checkpoin
 # --resume for initializing the parameters from the checkpoint
 ```
 
-3. Train PENet(Part Ⅲ)
+3. Train PENet (Part Ⅲ)
 ```bash
 # resume previous training
 CUDA_VISIBLE_DEVICES="0,1" python main.py -b 10 -n pe -he 160 -w 576 --resume [penet-checkpoint-path]
@@ -131,7 +133,7 @@ CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n pe --evaluate [penet-checkpoint-
 ### Test
 ```bash
 CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n pe --evaluate [penet-checkpoint-path] --test
-# generate results of the trained model on the test_depth_completion_anonymous data
+# generate and save results of the trained model on the test_depth_completion_anonymous data
 ```
 
 ## Citation
