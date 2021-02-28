@@ -1,7 +1,7 @@
 # PEDC: Precise and Efficient Depth Completion
 This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["Towards Precise and Efficient Image Guided Depth Completion"](https://arxiv.org/pdf/.pdf), developed by
 Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
-x
+
 Create a new issue for any code-related questions. Feel free to direct me as well at muhu@zju.edu.cn for any paper-related questions.
 
 ## Results
