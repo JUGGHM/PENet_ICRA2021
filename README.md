@@ -11,8 +11,10 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 
 ## Method
 ### A Strong Two-branch Backbone
-+ Two branch
++ Revisiting the popular two-branch architecture
 + Geometric encoding
+
+
 
 ### Dilated and Accelerated CSPN++
 + Dilated CSPN++
@@ -106,14 +108,14 @@ CUDA_VISIBLE_DEVICES="0,1" python main.py -b 10 -n pe -he 160 -w 576 --resume [p
 
 ### Evalution
 ```bash
+CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [penet-checkpoint-path]
 # test the trained model on the val_selection_cropped data
-CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [checkpoint-path]
 ```
 
 ### Test
 ```bash
-# test the trained model on the val_selection_cropped data
-CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [checkpoint-path] --test
+CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [penet-checkpoint-path] --test
+# generate results of the trained model on the test_depth_completion_anonymous data
 ```
 
 ## Citation
