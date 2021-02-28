@@ -13,15 +13,17 @@ Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://pers
 ## Method
 ### A Strong Two-branch Backbone
 + Revisiting the popular two-branch architecture
-We found that
+    We found that  
 ![Backbone](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Backbone.png "Backbone")
 + Geometric encoding
 ![Geometric Encoding](https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Geometric_Encoding.png "Geometric Encoding")
 
 ### Dilated and Accelerated CSPN++
 + Dilated CSPN
+    we introduce a dilation strategy similar to the well known dilated convolutions to enlarge the propagation neighborhoods.
 ![Dilated CSPN](https://github.com/JUGGHM/PEDC_ICRA2021/blob/main/images/Dilated_CSPN.png "Dilated CSPN")
 + Accelerated CSPN
+    we design an implementation that makes the propagation from each neighbor truly parallel, which greatly accelerates the propagation procedure.
 ![Accelerated CSPN](https://github.com/JUGGHM/PEDC_ICRA2021/blob/main/images/Accelerated_CSPN.png "Accelerated CSPN")
 
 
