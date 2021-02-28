@@ -1,6 +1,8 @@
 # PEDC: Precise and Efficient Depth Completion
 This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["Towards Precise and Efficient Image Guided Depth Completion"](https://arxiv.org/pdf/.pdf), developed by
 Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
+x
+Create a new issue for any code-related questions. Feel free to direct me as well at muhu@zju.edu.cn for any paper-related questions.
 
 ## Results
 + The proposed full model ranks 1st in the [KITTI depth completion](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion) online leaderboard at the time of submission.
@@ -99,7 +101,6 @@ python main.py -h
 
 1. Train ENet(Part Ⅰ)
 ```bash
-# train with the KITTI semi-dense annotations, rgbd input, and batch size 1
 CUDA_VISIBLE_DEVICES="0,1" python main.py -b 6 -n e
 # -b for batch size
 # -n for network model
@@ -122,13 +123,14 @@ CUDA_VISIBLE_DEVICES="0,1" python main.py -b 10 -n pe -he 160 -w 576 --resume [p
 
 ### Evalution
 ```bash
-CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [penet-checkpoint-path]
+CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n p --evaluate [enet-checkpoint-path]
+CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n pe --evaluate [penet-checkpoint-path]
 # test the trained model on the val_selection_cropped data
 ```
 
 ### Test
 ```bash
-CUDA_VISIBLE_DEVICES="0" python main.py -n pe --evaluate [penet-checkpoint-path] --test
+CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n pe --evaluate [penet-checkpoint-path] --test
 # generate results of the trained model on the test_depth_completion_anonymous data
 ```
 
