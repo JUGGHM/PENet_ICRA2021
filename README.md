@@ -118,7 +118,6 @@ CUDA_VISIBLE_DEVICES="0,1" python main.py -b 6 -f -n pe --resume [enet-checkpoin
 
 3. Train PENet (Part Ⅲ)
 ```bash
-# resume previous training
 CUDA_VISIBLE_DEVICES="0,1" python main.py -b 10 -n pe -he 160 -w 576 --resume [penet-checkpoint-path]
 # -he, -w for the image size after random cropping
 ```
