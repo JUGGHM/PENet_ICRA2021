@@ -90,6 +90,7 @@ The overall data directory is structured as follows:
 Download our pre-trained models:
 - PENet (*i.e.*, the proposed full model with dilation_rate=2): [Download Here](https://drive.google.com/file/d/1TRVmduAnrqDagEGKqbpYcKCT307HVQp1/view?usp=sharing)
 - ENet (*i.e.*, the backbone): [Download Here](https://drive.google.com/file/d/1RDdKlKJcas-G5OA49x8OoqcUDiYYZgeM/view?usp=sharing)
+
  Note that we don't need to decompress the pre-trained models. Just load the file of .pth.tar directly.
 
 ## Commands
