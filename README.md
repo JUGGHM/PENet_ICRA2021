@@ -30,12 +30,12 @@ To encode 3D geometric information, it simply augments a conventional convolutio
 #### Dilated CSPN
 <div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Dilated_CSPN.png" width = "60%" height = "60%" /></div>
 
-we introduce a dilation strategy similar to the well known dilated convolutions to enlarge the propagation neighborhoods.
+We introduce a dilation strategy similar to the well known dilated convolutions to enlarge the propagation neighborhoods.
 
 #### Accelerated CSPN
 <div align=center><img src="https://github.com/JUGGHM/PENet_ICRA2021/blob/main/images/Accelerated_CSPN.png" width = "100%" height = "100%" /></div>
 
-we design an implementation that makes the propagation from each neighbor truly parallel, which greatly accelerates the propagation procedure.
+We design an implementation that makes the propagation from each neighbor truly parallel, which greatly accelerates the propagation procedure.
 
 ## Contents
 1. [Dependency](#dependency)
@@ -90,6 +90,7 @@ The overall data directory is structured as follows:
 Download our pre-trained models:
 - PENet (*i.e.*, the proposed full model with dilation_rate=2): [Download Here](https://drive.google.com/file/d/1TRVmduAnrqDagEGKqbpYcKCT307HVQp1/view?usp=sharing)
 - ENet (*i.e.*, the backbone): [Download Here](https://drive.google.com/file/d/1RDdKlKJcas-G5OA49x8OoqcUDiYYZgeM/view?usp=sharing)
+ Note that we don't need to decompress the pre-trained models. Just load the file of .pth.tar directly.
 
 ## Commands
 A complete list of training options is available with
@@ -124,7 +125,7 @@ CUDA_VISIBLE_DEVICES="0,1" python main.py -b 10 -n pe -he 160 -w 576 --resume [p
 
 ### Evalution
 ```bash
-CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n p --evaluate [enet-checkpoint-path]
+CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n e --evaluate [enet-checkpoint-path]
 CUDA_VISIBLE_DEVICES="0" python main.py -b 1 -n pe --evaluate [penet-checkpoint-path]
 # test the trained model on the val_selection_cropped data
 ```
