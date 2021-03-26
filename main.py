@@ -457,9 +457,9 @@ def main():
             for p in model.module.backbone.parameters():
                 p.requires_grad = False
         if (penet_accelerated == True):
-            model.encoder3.requires_grad = False
-            model.encoder5.requires_grad = False
-            model.encoder7.requires_grad = False
+            model.module.encoder3.requires_grad = False
+            model.module.encoder5.requires_grad = False
+            model.module.encoder7.requires_grad = False
 
         helper.save_checkpoint({ # save checkpoint
             'epoch': epoch,
