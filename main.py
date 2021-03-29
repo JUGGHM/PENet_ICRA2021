@@ -256,7 +256,7 @@ def iterate(mode, args, loader, model, optimizer, logger, epoch):
             str_i = str(i)
             path_i = str_i.zfill(10) + '.png'
             path = os.path.join(args.data_folder_save, path_i)
-            vis_utils.save_depth_as_uint16png_upload(pred, path)
+            vis_utils.save_depth_as_uint8colored(pred, path)
 
         if(not args.evaluate):
             gpu_time = time.time() - start
