@@ -139,3 +139,30 @@ def save_feature_as_uint8colored(img, filename):
     img = feature_colorize(img)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(filename, img)
+
+
+def rgb_read(filename):
+    assert os.path.exists(filename), "file not found: {}".format(filename)
+    img_file = Image.open(filename)
+    # rgb_png = np.array(img_file, dtype=float) / 255.0 # scale pixels to the range [0,1]
+    rgb_png = np.array(img_file, dtype='uint8')  # in the range [0,255]
+    img_file.close()
+    return rgb_png
+
+
+def depth_read(filename):
+    # loads depth map D from png file
+    # and returns it as a numpy array,
+    # for details see readme.txt
+    assert os.path.exists(filename), "file not found: {}".format(filename)
+    img_file = Image.open(filename)
+    depth_png = np.array(img_file, dtype=int)
+    img_file.close()
+    # make sure we have a proper 16bit depth map here.. not 8bit!
+    assert np.max(depth_png) > 255, \
+        "np.max(depth_png)={}, path={}".format(np.max(depth_png), filename)
+
+    depth = depth_png.astype(np.float) / 256.
+    # depth[depth_png == 0] = -1.
+    depth = np.expand_dims(depth, -1)
+    return depth
