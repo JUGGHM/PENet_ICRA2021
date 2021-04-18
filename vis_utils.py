@@ -3,9 +3,9 @@ if not ("DISPLAY" in os.environ):
     import matplotlib as mpl
     mpl.use('Agg')
 import matplotlib.pyplot as plt
-from PIL import Image
 import numpy as np
 import cv2
+from PIL import Image
 
 cmap = plt.cm.jet
 cmap2 = plt.cm.nipy_spectral
@@ -139,3 +139,38 @@ def save_feature_as_uint8colored(img, filename):
     img = feature_colorize(img)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(filename, img)
+
+
+def rgb_read(filename):
+    assert os.path.exists(filename), "file not found: {}".format(filename)
+    img_file = Image.open(filename)
+    # rgb_png = np.array(img_file, dtype=float) / 255.0 # scale pixels to the range [0,1]
+    rgb_png = np.array(img_file, dtype='uint8')  # in the range [0,255]
+    img_file.close()
+    return rgb_png
+
+
+def depth_read(file_path: str):
+    """Loads depth map from a file and returns it as a numpy array.
+    Supported formats:
+        - PNG 16-bit encoding
+        - TIFF
+    :param file_path: absolute path to the depth image file
+    :return : the depth image as a numpy array
+    """
+    assert os.path.exists(file_path), "file not found: {}".format(file_path)
+    image_format = os.path.splitext(file_path)[1]
+    assert image_format in [".png", ".tiff"]
+
+    with Image.open(file_path) as img:
+        if image_format == ".tiff":
+            # TODO: add checks on the values range
+            depth = np.array(img, dtype=np.float32)
+        else:
+            # If PNG make sure we have a proper 16bit depth - not 8bit
+            depth_image = np.array(img, dtype=int)
+            assert np.max(depth_image) > 255, "Depths in PNG depth map should be encoded using 16 bits"
+            depth = depth_image.astype(np.float) / 256.
+
+    depth = np.expand_dims(depth, -1)
+    return depth
