@@ -1,11 +1,9 @@
 import argparse
 import typing
 import logging
-
 import torch
-import torch.nn.parallel
-import torch.optim
-import torch.utils.data
+import CoordConv
+import vis_utils
 
 # Use GPU only if GPU is available and memory is more than 8GB
 if torch.cuda.is_available() and torch.cuda.get_device_properties(0).total_memory > 8e9:
@@ -18,9 +16,6 @@ else:
 
 from collections import namedtuple
 from pathlib import Path
-
-import CoordConv
-import vis_utils
 from dataloaders import transforms
 from dataloaders import kitti_loader
 from model import ENet, PENet_C1, PENet_C2, PENet_C4
@@ -56,7 +51,7 @@ def _get_model(network_model: str, dilation_rate: int, conv_layer_encoding: str)
             model = PENet_C4(config).to(device)
             penet_accelerated = True
 
-    if penet_accelerated == True:
+    if penet_accelerated:
         model.encoder3.requires_grad = False
         model.encoder5.requires_grad = False
         model.encoder7.requires_grad = False
@@ -68,10 +63,10 @@ def _prepare_input(
     color_image_path: Path, sparse_depth_image_path: Path
 ) -> typing.Dict:
     # Get the calibration matrix
-    K = kitti_loader.load_calib()
+    camera_intrinsics = kitti_loader.load_calib()
 
     rgb = vis_utils.rgb_read(str(color_image_path))
-    d = vis_utils.depth_read(str(sparse_depth_image_path))
+    sparse_depth = vis_utils.depth_read(str(sparse_depth_image_path))
 
     heigth, width = INPUT_DIMS
     position = CoordConv.AddCoordsNp(heigth, width).call()
@@ -81,11 +76,11 @@ def _prepare_input(
     # Create input data dict
     data_dict = {
         "rgb": to_tensor(rgb).float(),
-        "d": to_tensor(d).float(),
+        "d": to_tensor(sparse_depth).float(),
         "gt": None,
         "g": None,
         "position": to_tensor(position).float(),
-        "K": to_tensor(K).float(),
+        "K": to_tensor(camera_intrinsics).float(),
     }
 
     return {
