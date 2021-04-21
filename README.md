@@ -1,3 +1,22 @@
+## Important: About Improper Inference Time Statistics
+The model's inference time is not properly reported in the original paper. This is because the original code ignores CUDA's asynchronous execution on CPU and GPU. To measure the inference time more precisely, the processes should be synchronized before recording current time:
+```
+torch.cuda.synchronize()
+```
+We restimated the inference time of following open-source models:
+
+|methods|runtime_not_synchronized|runtime_synchronized|
+|:----:|:----:|:----:|
+|PENet|0.032s|0.161s|
+|ENet|0.019s|0.064s|
+|[NLSPN](https://github.com/zzangjinsun/NLSPN_ECCV20)|0.127s|0.130s|
+|[ACMNet](https://github.com/sshan-zhao/ACMNet)|0.330s|0.350s|
+|[DeepLiDAR](https://github.com/JiaxiongQ/DeepLiDAR)|0.051s|0.351s|
+|[MSG-CHN](https://github.com/anglixjtu/msg_chn_wacv20)|0.011s|0.035s|
+|[FusionNet](https://github.com/wvangansbeke/Sparse-Depth-Completion)|0.022s|0.029s|
+
+We thank [wdjose](https://github.com/JUGGHM/PENet_ICRA2021/issues/4) for pointing out this problem. In addition,  ENet is more recommanded for real-time applications.
+
 # PENet: Precise and Efficient Depth Completion
 This repo is the PyTorch implementation of our paper to appear in ICRA2021 on ["Towards Precise and Efficient Image Guided Depth Completion"](https://arxiv.org/abs/2103.00783), developed by
 Mu Hu, Shuling Wang, Bin Li, Shiyu Ning, Li Fan, and [Xiaojin Gong](https://person.zju.edu.cn/en/gongxj) at Zhejiang University and Huawei Shanghai.
