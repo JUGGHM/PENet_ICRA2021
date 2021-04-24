@@ -253,7 +253,7 @@ class PENet_C1(nn.Module):
 
         # CSPN new
         ks = 3
-        encoder3 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder3 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -264,7 +264,7 @@ class PENet_C1(nn.Module):
         self.encoder3 = nn.Parameter(encoder3, requires_grad=False)
 
         ks = 5
-        encoder5 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder5 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -275,7 +275,7 @@ class PENet_C1(nn.Module):
         self.encoder5 = nn.Parameter(encoder5, requires_grad=False)
 
         ks = 7
-        encoder7 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder7 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -410,7 +410,7 @@ class PENet_C2(nn.Module):
 
         # CSPN
         ks = 3
-        encoder3 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder3 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -421,7 +421,7 @@ class PENet_C2(nn.Module):
         self.encoder3 = nn.Parameter(encoder3, requires_grad=False)
 
         ks = 5
-        encoder5 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder5 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -432,7 +432,7 @@ class PENet_C2(nn.Module):
         self.encoder5 = nn.Parameter(encoder5, requires_grad=False)
 
         ks = 7
-        encoder7 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder7 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -568,7 +568,7 @@ class PENet_C4(nn.Module):
 
         # CSPN
         ks = 3
-        encoder3 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder3 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -579,7 +579,7 @@ class PENet_C4(nn.Module):
         self.encoder3 = nn.Parameter(encoder3, requires_grad=False)
 
         ks = 5
-        encoder5 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder5 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
@@ -590,7 +590,7 @@ class PENet_C4(nn.Module):
         self.encoder5 = nn.Parameter(encoder5, requires_grad=False)
 
         ks = 7
-        encoder7 = torch.zeros(ks * ks, ks * ks, ks, ks).cuda()
+        encoder7 = torch.zeros(ks * ks, ks * ks, ks, ks)
         kernel_range_list = [i for i in range(ks - 1, -1, -1)]
         ls = []
         for i in range(ks):
