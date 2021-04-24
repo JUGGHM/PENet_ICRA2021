@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 from PIL import Image
+from tifffile import imsave
 
 cmap = plt.cm.jet
 cmap2 = plt.cm.nipy_spectral
@@ -111,6 +112,11 @@ def save_depth_as_uint16png_upload(img, filename):
     imgsave = Image.new("I", img.T.shape)
     imgsave.frombytes(img_buffer, 'raw', "I;16")
     imgsave.save(filename)
+
+def save_depth_as_floattiff(img, filename):
+    img = np.squeeze(img.data.cpu().numpy())
+    img = img.astype('float32')
+    imsave(filename, img)
 
 def save_depth_as_uint8colored(img, filename):
     #from tensor
