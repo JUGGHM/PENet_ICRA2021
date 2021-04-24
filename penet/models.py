@@ -1,4 +1,4 @@
-from basic import *
+from .basic import *
 
 class ENet(nn.Module):
     def __init__(self, args):

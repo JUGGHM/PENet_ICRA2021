@@ -3,14 +3,15 @@ import os.path
 import glob
 import fnmatch  # pattern matching
 import numpy as np
-from numpy import linalg as LA
-from random import choice
-from PIL import Image
 import torch
 import torch.utils.data as data
 import cv2
-from dataloaders import transforms
-import CoordConv
+from numpy import linalg as LA
+from random import choice
+from PIL import Image
+
+from . import transforms
+from .. import CoordConv
 
 input_options = ['d', 'rgb', 'rgbd', 'g', 'gd']
 
@@ -18,7 +19,8 @@ def load_calib():
     """
     Temporarily hardcoding the calibration matrix using calib file from 2011_09_26
     """
-    calib = open("dataloaders/calib_cam_to_cam.txt", "r")
+    calib_file_path = os.path.join(os.path.dirname(__file__), "calib_cam_to_cam.txt")
+    calib = open(calib_file_path, "r")
     lines = calib.readlines()
     P_rect_line = lines[25]
 
