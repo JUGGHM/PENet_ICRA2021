@@ -177,8 +177,8 @@ def _parse_args() -> argparse.Namespace:
         "-dr",
         "--dilation-rate",
         type=int,
-        choices=[1, 2, 3, 4],
-        default=3,
+        choices=[1, 2, 4],
+        default=2,
         help="Dilation rate used for depth prediction",
     )
 
