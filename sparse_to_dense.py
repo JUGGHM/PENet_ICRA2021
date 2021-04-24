@@ -103,13 +103,12 @@ def sparse_to_dense_dataset(
     )
     s2d_predictor = PENetSparseToDensePredictor(penet_model)
 
-
     for img_file, depth_file in zip(img_files, depth_files):
         _validate_img_depth_pair(img_file, depth_file)
         dense_depth_file_f = dense_depths_dir / (img_file.stem+".tiff")
         dense_depth_file_i = dense_depths_dir / (img_file.stem+".png")
 
-        # ## TODO: evaluate PENET and store image
+        # Evaluate PENET
         rgb = vis_utils.rgb_read(str(img_file))
         sparse_depth = vis_utils.depth_read(str(depth_file))
         dense_depth_image = s2d_predictor.predict(rgb, sparse_depth)
@@ -122,7 +121,8 @@ def sparse_to_dense_dataset(
         print(f"\tImage: {img_file}")
         print(f"\tDepth: {depth_file}")
         print(f"Output:")
-        print(f"\tDense: {dense_depth_file}")
+        print(f"\tDense_f: {dense_depth_file_f}")
+        print(f"\tDense_rgb: {dense_depth_file_i}")
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
