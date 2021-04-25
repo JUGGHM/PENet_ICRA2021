@@ -112,6 +112,7 @@ def sparse_to_dense_dataset(
         f"Number of color images and depth images is different. {len(img_files)}!={len(depth_files)}")
 
     # Loading PENet
+    torch.cuda.empty_cache()
     penet_model = get_model(
         network_model, dilation_rate, conv_layer_encoding, checkpoint_path
     )
