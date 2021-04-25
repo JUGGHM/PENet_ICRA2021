@@ -103,7 +103,7 @@ class PENetSparseToDensePredictor:
         }
 
         return {
-            key: torch.unsqueeze(value, 0)
+            key: torch.unsqueeze(value, 0).to(device)
             for key, value in data_dict.items()
             if value is not None
         }
