@@ -15,10 +15,9 @@ else:
 import vis_utils
 from pathlib import Path
 from os import makedirs
-from penet_s2d_predictor import PENetSparseToDensePredictor, get_model
+from penet_s2d_predictor import PENetSparseToDensePredictor, get_model, INPUT_DIMS
 
 LOGGER = logging.getLogger(__file__)
-
 
 def _validate_file_path(file_path: Path) -> None:
     assert file_path.is_file(), f"{file_path} is not a valid file."
@@ -33,6 +32,13 @@ def _validate_img_depth_pair(color_img_path: Path, depth_img_path: Path) ->None:
 def _image_depth_content_consistent(color_images: list, depth_images: list) -> bool:
     return len(color_images) == len(depth_images)
 
+def _get_preprocess_crop_fcn(preprocess_crop_type: str):
+    if preprocess_crop_type == "center":
+        preprocess_crop = vis_utils.centercrop(INPUT_DIMS)
+    else:
+        preprocess_crop = vis_utils.bottomcrop(INPUT_DIMS)
+    return preprocess_crop
+
 def sparse_to_dense(
     checkpoint_path: Path,
     color_image_path: Path,
@@ -41,6 +47,7 @@ def sparse_to_dense(
     network_model: str,
     dilation_rate: int,
     conv_layer_encoding: str,
+    preprocess_crop_type: str
 ) -> None:
     _validate_file_path(checkpoint_path)
     _validate_file_path(color_image_path)
@@ -51,13 +58,16 @@ def sparse_to_dense(
             sparse_depth_image_path.stem + "_dense" + sparse_depth_image_path.suffix
         )
 
+    # Preprocess transform
+    preprocess_transform = _get_preprocess_crop_fcn(preprocess_crop_type)
+
     penet_model = get_model(
         network_model, dilation_rate, conv_layer_encoding, checkpoint_path
     )
     s2d_predictor = PENetSparseToDensePredictor(penet_model)
 
-    rgb = vis_utils.rgb_read(str(color_image_path))
-    sparse_depth = vis_utils.depth_read(str(sparse_depth_image_path))
+    rgb = preprocess_transform(vis_utils.rgb_read(str(color_image_path)))
+    sparse_depth = preprocess_transform(vis_utils.depth_read(str(sparse_depth_image_path)))
 
     dense_depth_image = s2d_predictor.predict(rgb, sparse_depth)
 
@@ -72,6 +82,7 @@ def sparse_to_dense_dataset(
     network_model: str,
     dilation_rate: int,
     conv_layer_encoding: str,
+    preprocess_crop_type: str,
 ) -> None:
     _validate_folder_path(color_images_dir)
     _validate_folder_path(sparse_depths_dir)
@@ -82,6 +93,9 @@ def sparse_to_dense_dataset(
             makedirs(dense_depths_dir)
     else:
         _validate_folder_path(dense_depths_dir)
+
+    # Preprocess transform
+    preprocess_transform = _get_preprocess_crop_fcn(preprocess_crop_type)
 
     # Obtaining images and depths
     supported_img_formats = [".png"]
@@ -109,13 +123,13 @@ def sparse_to_dense_dataset(
         dense_depth_file_i = dense_depths_dir / (img_file.stem+".png")
 
         # Evaluate PENET
-        rgb = vis_utils.rgb_read(str(img_file))
-        sparse_depth = vis_utils.depth_read(str(depth_file))
+        rgb = preprocess_transform(vis_utils.rgb_read(str(img_file)))
+        sparse_depth = preprocess_transform(vis_utils.depth_read(str(depth_file)))
         dense_depth_image = s2d_predictor.predict(rgb, sparse_depth)
 
         # Save the depth image to disk
-        vis_utils.save_depth_as_uint8colored(dense_depth_image, dense_depth_file_i)
-        vis_utils.save_depth_as_floattiff(dense_depth_image, dense_depth_file_f)
+        vis_utils.save_depth_as_uint8colored(dense_depth_image, str(dense_depth_file_i))
+        vis_utils.save_depth_as_floattiff(dense_depth_image, str(dense_depth_file_f))
 
         print(f"Instance read: {img_file.stem}")
         print(f"\tImage: {img_file}")
@@ -192,6 +206,15 @@ def _parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument(
+        "-cr",
+        "--preprocess-crop",
+        default = "bottom",
+        type=str,
+        choices=["center", "bottom"],
+        help="resizing typeto match network size input"
+    )
+
+    parser.add_argument(
         "-sd",
         "--sparse-dataset",
         dest='sparse_dataset',
@@ -229,7 +252,8 @@ if __name__ == "__main__":
             dense_depths_dir = args.dense_depth_image,
             network_model = args.network_model,
             dilation_rate = args.dilation_rate,
-            conv_layer_encoding = args.conv_layer_encoding
+            conv_layer_encoding = args.conv_layer_encoding,
+            preprocess_crop_type=args.preprocess_crop
         )
         print("Finished predictions on dataset")
     else:
@@ -241,5 +265,6 @@ if __name__ == "__main__":
             network_model=args.network_model,
             dilation_rate=args.dilation_rate,
             conv_layer_encoding=args.conv_layer_encoding,
+            preprocess_crop_type=args.preprocess_crop
         )
         print("Finished prediction on image")

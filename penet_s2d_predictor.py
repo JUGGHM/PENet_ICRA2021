@@ -89,7 +89,7 @@ class PENetSparseToDensePredictor:
         self, rgb: np.ndarray, sparse_depth: np.ndarray,
     ) -> Dict[str, Union[None, np.ndarray]]:
 
-        assert rgb.shape[:2] == INPUT_DIMS
+        assert rgb.shape[:2] == INPUT_DIMS, f"rgb shape={rgb.shape[:2]} != {INPUT_DIMS} INPUT_DIMS"
         assert sparse_depth.shape[:2] == INPUT_DIMS
 
         # Create input data dict
