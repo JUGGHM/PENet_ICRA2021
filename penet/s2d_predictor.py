@@ -1,12 +1,13 @@
 import json
 import numpy as np
 import torch
-import CoordConv
 from collections import namedtuple
 from pathlib import Path
 from typing import Dict, Union
-from dataloaders import transforms, kitti_loader
-from model import ENet, PENet_C1, PENet_C2, PENet_C4
+
+from . import CoordConv
+from . import models
+from .dataloaders import transforms, kitti_loader
 
 # Height and width of the input images
 INPUT_DIMS = (352, 1216)
@@ -29,23 +30,30 @@ def get_model(network_model: str, dilation_rate: int, conv_layer_encoding: str, 
     config = ModelConfig(network_model, dilation_rate, conv_layer_encoding)
     penet_accelerated = False
     if network_model == "e":
-        model = ENet(config).to(device)
+        model = models.ENet(config).to(device)
     else:
         if dilation_rate == 1:
-            model = PENet_C1(config).to(device)
+            model = models.PENet_C1(config).to(device)
             penet_accelerated = True
         elif dilation_rate == 2:
-            model = PENet_C2(config).to(device)
+            model = models.PENet_C2(config).to(device)
             penet_accelerated = True
         elif dilation_rate == 4:
-            model = PENet_C4(config).to(device)
+            model = models.PENet_C4(config).to(device)
             penet_accelerated = True
 
     if penet_accelerated:
         model.encoder3.requires_grad = False
         model.encoder5.requires_grad = False
         model.encoder7.requires_grad = False
-
+    
+    # FIXME - This is nasty hack. The pretrained models available
+    # on GitHub contain the whole model objects, not just the state dicts
+    # (see https://github.com/pytorch/pytorch/issues/3678) so it expects
+    # module metrics.py to be in the PYTHONPATH. So, since the source code
+    # was moved into this module, we need this workaround to load the models.
+    import os, sys
+    sys.path.insert(0, os.path.dirname(__file__))
     checkpoint = torch.load(str(checkpoint_file_path), map_location=device)
     model.load_state_dict(checkpoint["model"], strict=False)
     model.eval()
@@ -76,7 +84,7 @@ class PENetSparseToDensePredictor:
         assert network_model in ["e", "pe"]
         dilation_rate = config["dilation_rate"]
         assert dilation_rate in [1,2,3,4]
-        conv_layer_encoding = config["convolutional_layer_enconding"]
+        conv_layer_encoding = config["convolutional_layer_encoding"]
         assert conv_layer_encoding in ["xyz", "std"]
 
         # Get model data structure
@@ -111,7 +119,7 @@ class PENetSparseToDensePredictor:
     def predict(self, rgb: np.ndarray, sparse_depth: np.ndarray) -> np.ndarray:
         input_data_dict = self._prepare_input(rgb, sparse_depth)
 
-        if isinstance(self.penet_model, ENet):
+        if isinstance(self.penet_model, models.ENet):
             _, _, pred_dense_depth_image = self.penet_model(input_data_dict)
         else:
             pred_dense_depth_image = self.penet_model(input_data_dict)

@@ -3,8 +3,8 @@ import os, time
 import shutil
 import torch
 import csv
-import vis_utils
-from metrics import Result
+from . import vis_utils
+from .metrics import Result
 
 fieldnames = [
     'epoch', 'rmse', 'photo', 'mae', 'irmse', 'imae', 'mse', 'absrel', 'lg10',

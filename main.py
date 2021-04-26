@@ -7,19 +7,12 @@ import torch.optim
 import torch.utils.data
 import time
 
-from dataloaders.kitti_loader import load_calib, input_options, KittiDepth
-from metrics import AverageMeter, Result
-import criteria
-import helper
-import vis_utils
-
-from model import ENet
-from model import PENet_C1_train
-from model import PENet_C2_train
-#from model import PENet_C4_train (Not Implemented)
-from model import PENet_C1
-from model import PENet_C2
-from model import PENet_C4
+from penet.dataloaders.kitti_loader import load_calib, input_options, KittiDepth
+from penet.metrics import AverageMeter, Result
+from penet import criteria
+from penet import helper
+from penet import vis_utils
+from penet import models
 
 parser = argparse.ArgumentParser(description='Sparse-to-Dense')
 parser.add_argument('-n',
@@ -328,24 +321,24 @@ def main():
     model = None
     penet_accelerated = False
     if (args.network_model == 'e'):
-        model = ENet(args).to(device)
+        model = models.ENet(args).to(device)
     elif (is_eval == False):
         if (args.dilation_rate == 1):
-            model = PENet_C1_train(args).to(device)
+            model = models.PENet_C1_train(args).to(device)
         elif (args.dilation_rate == 2):
-            model = PENet_C2_train(args).to(device)
+            model = models.PENet_C2_train(args).to(device)
         elif (args.dilation_rate == 4):
-            model = PENet_C4(args).to(device)
+            model = models.PENet_C4(args).to(device)
             penet_accelerated = True
     else:
         if (args.dilation_rate == 1):
-            model = PENet_C1(args).to(device)
+            model = models.PENet_C1(args).to(device)
             penet_accelerated = True
         elif (args.dilation_rate == 2):
-            model = PENet_C2(args).to(device)
+            model = models.PENet_C2(args).to(device)
             penet_accelerated = True
         elif (args.dilation_rate == 4):
-            model = PENet_C4(args).to(device)
+            model = models.PENet_C4(args).to(device)
             penet_accelerated = True
 
     if (penet_accelerated == True):
