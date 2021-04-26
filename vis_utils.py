@@ -36,7 +36,7 @@ def centercrop(size):
                     floor((h-size[0])/2) : h - ceil((h-size[0])/2),
                     floor((w-size[1])/2) : w - ceil((w-size[1])/2), :]
         return img_out
-    return centercrop
+    return center_crop
 
 def depth_colorize(depth):
     depth = (depth - np.min(depth)) / (np.max(depth) - np.min(depth))
