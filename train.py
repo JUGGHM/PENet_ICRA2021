@@ -79,7 +79,7 @@ def _get_model_and_logger(options: argparse.Namespace):
 
 def _get_kitti_dataloaders(
     options: argparse.Namespace,
-) -> typing.Tuple[torch.data.DataLoader, torch.data.DataLoader]:
+) -> typing.Tuple[DataLoader, DataLoader]:
     """Return data loaders configured according to cli options
     :param options: the cli options
     :return: a tuple with the training and validation data loaders
@@ -386,21 +386,21 @@ def _parse_args() -> argparse.Namespace:
         default=100,
         type=int,
         metavar="N",
-        help="number of total epochs to run (default: 100)",
+        help="Number of total epochs to run (default: 100)",
     )
     parser.add_argument(
         "--start-epoch",
         default=0,
         type=int,
         metavar="N",
-        help="manual epoch number (useful on restarts)",
+        help="Manual epoch number (useful on restarts)",
     )
     parser.add_argument(
         "--start-epoch-bias",
         default=0,
         type=int,
         metavar="N",
-        help="manual epoch number bias (useful on restarts)",
+        help="Manual epoch number bias (useful on restarts)",
     )
     parser.add_argument(
         "-c",
@@ -408,7 +408,7 @@ def _parse_args() -> argparse.Namespace:
         metavar="LOSS",
         default="l2",
         choices=criteria.loss_names,
-        help="loss function: | ".join(criteria.loss_names) + " (default: l2)",
+        help="Loss function.",
     )
     parser.add_argument(
         "-b",
@@ -458,7 +458,7 @@ def _parse_args() -> argparse.Namespace:
         "--data-folder-rgb",
         type=str,
         metavar="PATH",
-        help="data folder rgb (default: none)",
+        help="Full path to the directory containing the KITTI raw dataset.",
     )
     parser.add_argument(
         "-i",
