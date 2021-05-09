@@ -1,6 +1,7 @@
 import argparse
 import typing
 import logging
+import os
 import time
 import torch
 
@@ -26,30 +27,26 @@ from penet import helper
 from penet import models
 from penet import criteria
 from penet.metrics import AverageMeter, Result
-from penet.s2d_predictor import ModelConfig
 from penet.dataloaders.kitti_loader import input_options, KittiDepth
 
 _MULTI_BATCH_SIZE = 1
 _RUNS_DIR_PATH = (
     Path(__file__).parent / "runs"
 )  # This is where tensorboard summaries are saved
+_DEFAULT_RESULTS_FOLDER = Path(__file__).parent / "results"
 
 
 def _get_model_and_logger(options: argparse.Namespace):
-    config = ModelConfig(
-        options.network_model, options.dilation_rate, options.conv_layer_encoding
-    )
-
     # Instantiate the model object
     if options.network_model == "e":
-        model = models.ENet(config).to(device)
+        model = models.ENet(options).to(device)
     else:
         if options.dilation_rate == 1:
-            model = models.PENet_C1(config).to(device)
+            model = models.PENet_C1(options).to(device)
         elif options.dilation_rate == 2:
-            model = models.PENet_C2(config).to(device)
+            model = models.PENet_C2(options).to(device)
         elif options.dilation_rate == 4:
-            model = models.PENet_C4(config).to(device)
+            model = models.PENet_C4(options).to(device)
 
     # Instantiate logger
     logger = helper.logger(options)
@@ -61,7 +58,7 @@ def _get_model_and_logger(options: argparse.Namespace):
         except ModuleNotFoundError:
             # Pre-trained models on GitHub fail after the refactoring because
             # metrics.py is not found by pickle so we use this hack
-            import os, sys
+            import sys
 
             sys.path.insert(0, os.path.dirname(__file__))
             checkpoint = torch.load(str(options.resume), map_location=device)
@@ -102,10 +99,6 @@ def _get_kitti_dataloaders(
         pin_memory=True,
     )
     return train_loader, val_loader
-
-
-def log_stats():
-    pass
 
 
 def iterate(mode, options, loader, model, optimizer, depth_criterion, logger, epoch):
@@ -246,7 +239,6 @@ class PENetSummaryWriter(SummaryWriter):
 
 
 def train(options: argparse.Namespace):
-
     # Instantiate model and logger
     model, logger = _get_model_and_logger(options)
 
@@ -299,8 +291,10 @@ def train(options: argparse.Namespace):
 
     # Configure tensorboard summary writers
     train_summary_dir_path = _RUNS_DIR_PATH / options.session_name / "training"
+    train_summary_dir_path.mkdir(parents=True, exist_ok=True)
     train_writer = PENetSummaryWriter(str(train_summary_dir_path))
     val_summary_dir_path = _RUNS_DIR_PATH / options.session_name / "validation"
+    val_summary_dir_path.mkdir(parents=True, exist_ok=True)
     val_writer = PENetSummaryWriter(str(val_summary_dir_path))
 
     for epoch in range(options.start_epoch, options.epochs):
@@ -443,8 +437,8 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--resume",
-        default="",
         type=lambda p: Path(p).expanduser().resolve(),
+        default=None,
         help="Path to the training checkpoint to resume from.",
     )
     parser.add_argument(
@@ -456,9 +450,23 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--data-folder-rgb",
+        required=True,
         type=str,
         metavar="PATH",
         help="Full path to the directory containing the KITTI raw dataset.",
+    )
+    parser.add_argument(
+        "--data-folder-save",
+        required=True,
+        type=str,
+        metavar="PATH",
+        help="Full path to the directory where the outputs should be saved.",
+    )
+    parser.add_argument(
+        "--result",
+        type=str,
+        default=str(_DEFAULT_RESULTS_FOLDER),
+        help="Full path to the results folder.",
     )
     parser.add_argument(
         "-i",
@@ -540,7 +548,13 @@ def _parse_args() -> argparse.Namespace:
         help="CSPN++ dilation rate",
     )
 
-    return parser.parse_args()
+    options = parser.parse_args()
+    options.use_rgb = "rgb" in options.input
+    options.use_d = "d" in options.input
+    options.use_g = "g" in options.input
+    options.val_h = 352
+    options.val_w = 1216
+    return options
 
 
 if __name__ == "__main__":
