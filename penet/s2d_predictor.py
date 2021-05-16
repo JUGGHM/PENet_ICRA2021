@@ -100,6 +100,9 @@ class PENetSparseToDensePredictor:
         assert rgb.shape[:2] == INPUT_DIMS, f"rgb shape={rgb.shape[:2]} != {INPUT_DIMS} INPUT_DIMS"
         assert sparse_depth.shape[:2] == INPUT_DIMS
 
+        if sparse_depth.ndim == 2:
+            sparse_depth = np.expand_dims(sparse_depth, -1)
+
         # Create input data dict
         data_dict = {
             "rgb": self.to_tensor_functor(rgb).float(),
